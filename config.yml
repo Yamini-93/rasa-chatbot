@@ -1,0 +1,44 @@
+# The config recipe.
+recipe: default.v1
+
+# Unique assistant identifier
+assistant_id: 20250317-105546-weighted-cabinet
+
+language: "en"
+# Pipeline for NLU
+pipeline:
+- name: "WhitespaceTokenizer"    # Required for tokenization
+
+  # Language Model Featurizer: to use any pre-trained models(BERT model for featurization)
+- name: "LanguageModelFeaturizer"
+  model_name: "bert"
+  model_weights: "bert-base-uncased"    # Pre-trained BERT model
+
+  # DIETClassifier for intent classification and entity recognition using BERT
+- name: "DIETClassifier"
+  epochs: 100
+  constrain_similarities: true
+  model_confidence: softmax    # Updated to softmax for valid setting
+  intent_classification: true
+  entity_recognition: true
+  use_transformers: true
+  transformer_model_name: "bert-base-uncased"    # Specify the BERT model for fine-tuning
+  embedding_dimension: 768    # Set based on BERT (768 for BERT-base)
+
+  # Entity Synonym Mapper to map synonyms
+- name: "EntitySynonymMapper"
+
+  # Response Selector to handle multi-response scenarios
+- name: "ResponseSelector"
+  epochs: 100
+  constrain_similarities: true
+
+
+# Configuration for Rasa Core (Dialogue management)
+policies:
+- name: "MemoizationPolicy"    # Remembers previous conversations for better handling
+- name: "RulePolicy"    # Allows defining rule-based conversation flows
+- name: "TEDPolicy"    # Transformer Embedding Dialogue Policy (for better dialogue management)
+  max_history: 10    # Number of previous turns to consider for context
+  epochs: 200    # Number of epochs to train TEDPolicy
+  constrain_similarities: true    # Ensures similar intent predictions use a defined similarity threshold

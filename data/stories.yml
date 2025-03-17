@@ -1,0 +1,59 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sample convo
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+  - intent: user_help
+  - action: utter_user_help
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: provide agriculture information
+  steps:
+  - intent: agriculture_info
+  - action: action_fetch_agriculture_info
+
+- story: provide weather information
+  steps:
+  - intent: weather_info
+  - action: action_fetch_weather_info
+
+- story: provide crop recommendation
+  steps:
+  - intent: crop_recommendation_info
+  - action: action_fetch_crop_recommendation_info
+
+- story: provide soil recommendation  # Added soil information story
+  steps:
+  - intent: soil_recommendation_info
+  - action: action_fetch_soil_recommendation

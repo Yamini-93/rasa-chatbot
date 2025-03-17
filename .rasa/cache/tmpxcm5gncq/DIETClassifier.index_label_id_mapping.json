@@ -1,0 +1,15 @@
+{
+  "0": "affirm",
+  "1": "agriculture_info",
+  "2": "bot_challenge",
+  "3": "crop_recommendation_info",
+  "4": "deny",
+  "5": "goodbye",
+  "6": "greet",
+  "7": "horticulture_info",
+  "8": "mood_great",
+  "9": "mood_unhappy",
+  "10": "soil_recommendation_info",
+  "11": "user_help",
+  "12": "weather_info"
+}
